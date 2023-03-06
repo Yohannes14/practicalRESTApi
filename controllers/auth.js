@@ -89,11 +89,10 @@ exports.getUserStatus = (req, res, next) => {
         err.statusCode = 500;
       }
       next(err);
-
     });
 };
 
-exports.updatedUserStatus = (req, res, next) => {
+exports.updateUserStatus = (req, res, next) => {
   const newStatus = req.body.status;
   User.findById(req.userId)
     .then(user => {
@@ -106,14 +105,12 @@ exports.updatedUserStatus = (req, res, next) => {
       return user.save();
     })
     .then(result => {
-      res.status(200).json({ status: user.status });
+      res.status(200).json({ message: 'User updated.' });
     })
     .catch(err => {
       if (!err.statusCode) {
         err.statusCode = 500;
       }
       next(err);
-
     });
-
-}
+};
